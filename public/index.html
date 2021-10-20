@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo-min.svg" type="image/x-icon">
+  <!-- <link rel="stylesheet" href="libraries/all.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.0.0-beta2/css/fontawesome.min.css"
+    integrity="sha512-Rcr1oG0XvqZI1yv1HIg9LgZVDEhf2AHjv+9AuD1JXWGLzlkoKDVvE925qySLcEywpMAYA/rkg296MkvqBF07Yw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <!-- <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
+    integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/fontawesome.css"
+      integrity="sha512-NQCKOSsUyZsvf5ItxWh1bR2vlY0cgw1Rx9tJRLJr31GT9oxCno9uwtiVmVFgN2BlHo1jmwjtH8ivIaob4YF+jw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>System Status - Home</title>
+  <style>
+    ::-webkit-scrollbar {
+      background: #eee;
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 25px;
+      background: #ccc;
+    }
+
+    @font-face {
+      font-family: rbt;
+      src: url(fonts/Roboto-Regular.ttf);
+    }
+
+    @font-face {
+      font-family: ms;
+      src: url(fonts/Montserrat-Medium.ttf);
+    }
+
+    body,
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: ms;
+      font-family: rbt;
+      font-size: 14px;
+    }
+
+    body {
+      background-color: #fcfcfc;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+      padding: 10px;
+    }
+
+    header {
+      background-color: #fff;
+      z-index: 20;
+      box-shadow: 0 1px 4px 1px #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+      padding: 5px;
+      position: relative;
+    }
+
+    .header-bank-name {
+      font-size: 22px;
+      color: #999;
+    }
+
+    .header-aside-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-aside-right .btn-login-mob {
+      margin: 5px;
+      display: none;
+    }
+
+    .btn-login-mob i {
+      font-size: 24px;
+    }
+
+    #btn-bars-container {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
+
+    #btn-bars-container:active {
+      background-color: #ddd;
+    }
+
+    section {
+      width: 70%;
+      margin: auto;
+      height: calc(100vh - 102px);
+      overflow-y: scroll;
+      border-left: 1px solid #fafafa;
+      border-right: 1px solid #fafafa;
+      background-color: #fff;
+    }
+
+    #form-filter {
+      margin: auto 10px;
+    }
+
+    .header-aside {
+      display: flex;
+      align-items: center;
+    }
+
+    #select-bank {
+      width: 200px;
+      padding: 10px;
+      outline: none;
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .link-login {
+      padding: 12px;
+      border-radius: 2px;
+      border: 1px solid indigo;
+      text-decoration: none;
+      color: indigo;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    .link-login i {
+      margin-right: 5px;
+    }
+
+    .logo-min {
+      width: 40px;
+      height: 40px;
+      display: none;
+    }
+
+    #logo {
+      height: 60px;
+      width: 200px;
+    }
+
+    #logo-text {
+      text-align: center;
+    }
+
+    #logo-text a {
+      font-size: 28px;
+      font-family: rbt;
+    }
+
+    .services {
+      padding: 20px;
+    }
+
+    footer {
+      height: 40px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #f9f9f9;
+    }
+
+    footer .contact {
+      display: flex;
+    }
+
+    footer .contact p {
+      margin: 10px;
+    }
+
+    .contact p a {
+      color: #444;
+    }
+
+    .contact p a i {
+      margin-right: 5px;
+    }
+
+    .banks-imgs {
+      display: flex;
+      display: none;
+    }
+
+    @media screen and (max-width: 414px) {
+      ::-webkit-scrollbar {
+        background: #eee;
+        width: 0;
+      }
+
+      header {
+        position: sticky;
+        box-shadow: 0 1px 4px 1px #aaa;
+        height: 50px;
+        top: 0;
+      }
+
+      .header-bank-name {
+        display: none;
+      }
+
+      .link-login {
+        display: none;
+      }
+
+      #select-bank {
+        width: 170px;
+      }
+
+      section {
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        border: none;
+      }
+
+      footer {
+        flex-direction: column;
+        height: auto;
+        padding-top: 20px;
+        display: none;
+      }
+
+      #btn-bars-container {
+        display: flex;
+      }
+
+      .header-aside-right .btn-login-mob {
+        display: inline-flex;
+      }
+
+      .logo-min {
+        display: inline-block;
+      }
+
+      #logo {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-aside">
+      <div id="logo">
+        <a href="/"><img src="img/logo.svg" alt=""></a>
+      </div>
+      <div class="logo-min">
+        <a href="/"><img src="img/logo-min.svg" alt=""></a>
+      </div>
+      <form id="form-filter">
+        <select id="select-bank"></select>
+      </form>
+    </div>
+
+    <h1 class="header-bank-name"></h1>
+
+    <div class="header-aside-right">
+      <a class="btn-login-mob" href="/login"><i class="fa fa-user-circle"></i></a>
+      <a class="link-login" href="/login">
+        <i class="fa fa-user-circle"></i>
+        <p id="link-login-label">Iniciar sessão</p>
+      </a>
+      <div id="btn-bars-container">
+        <img src="img/bars-solid.svg" alt="bars" id="btn-bars" width="30" height="30">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div id="systems">
+        <ul id="systems-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <p>System Status &copy; 2021</p>
+    </div>
+    <div class="contact">
+      <p>
+        <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=sairessy@gmail.com&su=&body=">
+          <i class="fa fa-envelope"></i>email
+        </a>
+      </p>
+      <p><a href="https://wa.me/+258847460853"><i class="fa fa-whatsapp"></i>WhatsApp</a></p>
+      <p><a href="#"><i class="fa fa-linkedin"></i>Linkedin</a></p>
+    </div>
+    <div class="banks-imgs">
+      <img src="img/bars-solid.svg" width="20" height="20" alt="">
+      <img src="img/bars-solid.svg" width="20" height="20" alt="">
+      <img src="img/bars-solid.svg" width="20" height="20" alt="">
+      <img src="img/bars-solid.svg" width="20" height="20" alt="">
+    </div>
+  </footer>
+</body>
+
+<script src="js/config.js"></script>
+<script>
+  getStystems()
+  async function getStystems() {
+    const response = await fetch('/systems')
+    const json = await response.json()
+
+    let systems = '';
+
+    for (let i = 0; i < json.length; i++) {
+      const { balcon, bank, services } = json[i];
+      let ss = '';
+      services.forEach(s => {
+        let remainingTime = '';
+        if (s.time !== '0' && s.expectedTime !== undefined) {
+          remainingTime = `
+            ${new Date(Date.now() - s.time).getUTCHours()} :
+              ${new Date(Date.now() - s.time).getMinutes()} : 
+              ${new Date(Date.now() - s.time).getSeconds()
+            }`
+
+          if (s.expectedTime <= new Date(Date.now() - s.time).getUTCHours()) {
+            remainingTime = `${s.expectedTime} : 0 : 0`;
+          }
+        }
+        ss += `
+        <div id='${s.time + '-' + s.expectedTime}' style='display: flex; align-items: center; margin-bottom: 10px;' class='service'>
+          <div style='width:10px; height:10px; border-radius: 100%;
+          background: ${s.disponible ? '#2bccb1' : '#ddd'};margin-right: 20px;'></div>
+          <p>${s.label}</p>
+          <p style='margin-left: 10px;color: #777;' id='${s.time + '-' + s.expectedTime + '-' + 'timer'}'>
+          ${remainingTime !== '' && s.expectedTime !== '0' ?
+            remainingTime + ' -- ' + s.expectedTime + ' h' : ''
+          }
+          </p>
+        </div>`;;
+      })
+      systems += `
+        <li class="system" style='margin-bottom: 40px;'>
+          <h3>
+            ${balcon.toUpperCase()}
+            <small style='font-size: 12px;color: #999;'>(${config.banks.filter(b => b.id == bank)[0].label})</small>
+            </h3>
+          <div class='services'>
+            ${ss}
+          </div>
+        </li>`;
+    }
+    document.getElementById('systems-list').innerHTML = systems;
+  }
+
+  setInterval(() => {
+    const sys = document.querySelectorAll('.service');
+    sys.forEach(s => {
+      if (s.id != '0-0' && s.id != 'undefined-undefined') {
+        const time = s.id.split('-')[0];
+        const expectedTime = s.id.split('-')[1];
+        const hours = new Date(Date.now() - time).getUTCHours();
+        const mins = new Date(Date.now() - time).getMinutes();
+        const secs = new Date(Date.now() - time).getSeconds();
+        const remainingTime = `${hours} : ${mins} : ${secs}`;
+        const remaining = remainingTime + ' -- ' + expectedTime + ' h';
+
+        if (hours >= expectedTime) {
+          return;
+        }
+
+        document.getElementById(`${s.id}-timer`).innerText = remaining;
+      }
+    });
+  }, 1000);
+
+  let banks = '<option value="">All</option>';
+  config.banks.forEach(b => {
+    banks += `<option value='${b.id}'>${b.label}</option>`;
+  })
+
+  document.getElementById('select-bank').innerHTML = banks;
+
+  document.getElementById('select-bank').addEventListener('change', e => {
+    const val = e.target.value;
+    if (val === '') {
+      getStystems();
+      document.querySelector('.header-bank-name').innerText = '';
+    } else {
+      getBanksFrom(val);
+    }
+  });
+
+  // Get banks from a specific bank
+  async function getBanksFrom(id) {
+    const response = await fetch(`/services/bank/${id}`);
+    const json = await response.json();
+    if (json.length > 0) {
+      let systems = '';
+
+      for (let i = 0; i < json.length; i++) {
+        const { balcon, bank, services } = json[i];
+        let ss = '';
+        services.forEach(s => {
+          let remainingTime = '';
+          if (s.time !== '0' && s.expectedTime !== undefined) {
+            remainingTime = `
+            ${new Date(Date.now() - s.time).getUTCHours()} :
+              ${new Date(Date.now() - s.time).getMinutes()} : 
+              ${new Date(Date.now() - s.time).getSeconds()
+              }`
+
+            if (s.expectedTime <= new Date(Date.now() - s.time).getUTCHours()) {
+              remainingTime = `${s.expectedTime} : 0 : 0`;
+            }
+          }
+          ss += `
+        <div id='${s.time + '-' + s.expectedTime}' style='display: flex; align-items: center; margin-bottom: 10px;' class='service'>
+          <div style='width:10px; height:10px; border-radius: 100%;
+          background: ${s.disponible ? '#2bccb1' : '#ddd'};margin-right: 20px;'></div>
+          <p>${s.label}</p>
+          <p style='margin-left: 10px;color: #777;' id='${s.time + '-' + s.expectedTime + '-' + 'timer'}'>
+          ${remainingTime !== '' && s.expectedTime !== '0' ?
+              remainingTime + ' -- ' + s.expectedTime + ' h' : ''
+            }
+          </p>
+        </div>`;;
+        })
+        systems += `
+        <li class="system" style='margin-bottom: 40px;'>
+          <h3>
+            ${balcon.toUpperCase()}
+            <small style='font-size: 12px;color: #999;'>(${config.banks.filter(b => b.id == bank)[0].label})</small>
+            </h3>
+          <div class='services'>
+            ${ss}
+          </div>
+        </li>`;
+      }
+      document.getElementById('systems-list').innerHTML = systems;
+
+      const bankName = config.banks.filter(b => b.id == id)[0].label;
+
+      document.querySelector('.header-bank-name').innerText = bankName;
+    }
+  }
+
+  (async function checkSession() {
+    const response = await fetch('/checksession')
+    const json = await response.json()
+    if (json.status) {
+      document.getElementById('link-login-label').innerText = 'Meu perfil';
+      document.querySelector('.link-login').href = '/profile'
+    }
+  })();
+</script>
+
+</html>

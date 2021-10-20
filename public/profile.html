@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo-min.svg" type="image/x-icon">
+  <!-- <link rel="stylesheet" href="libraries/all.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>System Status - Profile</title>
+
+  <style>
+    @font-face {
+      font-family: rbt;
+      src: url(fonts/Roboto-Regular.ttf);
+    }
+
+    @font-face {
+      font-family: ms;
+      src: url(fonts/Montserrat-Medium.ttf);
+    }
+
+    body,
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: ms;
+      font-size: 14px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: indigo;
+    }
+
+
+    #logo {
+      margin-bottom: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 70%;
+    }
+
+    #logo-text {
+      text-align: center;
+    }
+
+    #logo-text a {
+      font-size: 28px;
+      font-family: rbt;
+    }
+
+    main {
+      display: flex;
+    }
+
+    aside {
+      width: 300px;
+      padding: 10px;
+    }
+
+    .link-logout {
+      padding: 10px;
+      border-radius: 2px;
+      text-decoration: none;
+      color: indigo;
+      display: block;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .link-logout i {
+      margin-right: 10px;
+      display: none;
+    }
+
+    section {
+      flex: 1;
+      background-color: #fcfcfc;
+      height: 100vh;
+    }
+
+    #form-add-service {
+      padding: 10px;
+      display: flex;
+      background-color: #f9f9f9;
+    }
+
+    #form-add-service input,
+    #form-add-service button {
+      padding: 10px;
+      border-radius: 0;
+      outline: none;
+    }
+
+    #form-add-service input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    #form-add-service button {
+      border: 1px solid indigo;
+      background-color: indigo;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #services {
+      border-top: 1px solid #eee;
+      height: calc(100vh - 61px);
+      overflow-y: scroll;
+    }
+
+    .service {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    .service-aside {
+      display: flex;
+      align-items: center;
+    }
+
+    .disponible {
+      display: flex;
+      align-items: center;
+      margin: 5px 20px;
+      padding: 5px;
+      border-radius: 5px;
+      width: 105px;
+    }
+
+    .disponible input {
+      margin-right: 5px;
+    }
+
+    .service-label {
+      color: indigo;
+    }
+
+    .service button {
+      background-color: #eee;
+      color: #444;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .service button:hover {
+      opacity: .6;
+    }
+
+    .service button:active {
+      opacity: .4;
+    }
+
+    @media screen and (max-width: 414px) {
+      main {
+        display: block;
+      }
+
+      aside {
+        width: auto;
+      }
+
+      section {
+        height: auto;
+      }
+
+      .nav-aside {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <aside>
+      <div id="logo">
+        <!-- <h1 id="logo-text">
+          <a href="/">Stystem Status</a>
+        </h1> -->
+        <a href="/"><img src="img/logo.svg" alt=""></a>
+      </div>
+      <div class="nav-aside">
+        <a class="link-logout" href="/"><i class="fa fa-home"></i>Página inicial</a>
+        <a class="link-logout" href="/user/logout"><i class="fa fa-sign-out-alt"></i>Terminar sessão</a>
+      </div>
+    </aside>
+    <section>
+      <form id="form-add-service">
+        <input type="text" placeholder="Nome do serviço" id="inp-service-label" required>
+        <button>Adicionar</button>
+      </form>
+      <div id="services">
+        <ul id="services-list">
+
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+
+<script src="js/config.js"></script>
+<script>
+
+  getServices();
+
+  async function getServices() {
+    const response = await fetch('/userservices')
+    const json = await response.json()
+
+    let services = '';
+
+    for (let i = 0; i < json.length; i++) {
+      const s = json[i];
+      const { label, _id, disponible } = json[i];
+
+      let remainingTime = '';
+      if (s.time !== '0' && s.expectedTime !== undefined) {
+        remainingTime = `
+            ${new Date(Date.now() - s.time).getUTCHours()} :
+              ${new Date(Date.now() - s.time).getMinutes()} : 
+              ${new Date(Date.now() - s.time).getSeconds()
+          }`
+
+        if (s.expectedTime <= new Date(Date.now() - s.time).getUTCHours()) {
+          remainingTime = `${s.expectedTime} : 0 : 0`;
+        }
+      }
+      services += `
+    <li class="service">
+      <div class="service-aside">
+        <div class="disponible" style='background-color: ${disponible ? '#2bccb1' : '#ddd'};'>
+          <input id="${_id}" type="checkbox" onchange='changeDisponibility(${_id});'} ${disponible ? 'checked' : 'unchecked'}>
+          <label for="${_id}">${disponible ? 'Disponível' : 'Indisponível'}</label>
+        </div>
+        <p class="service-label">${label}</p>
+        <p style='margin-left: 10px;'>
+        ${remainingTime !== '' && s.expectedTime !== '0' ?
+          s.expectedTime + ' h' : ''
+        }
+        </p>
+      </div>
+      <button class="remove-service" onclick='removeService(${_id});'>
+        <i class='fa fa-times' style='margin-right: 5px;'></i>
+        Remover
+      </button>
+    </li>`;
+    }
+    document.getElementById('services-list').innerHTML = services;
+  }
+
+
+
+  document.getElementById('form-add-service').addEventListener('submit', async e => {
+    e.preventDefault()
+    const label = document.getElementById('inp-service-label').value
+
+    const response = await fetch('/addservice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ label })
+    })
+
+    const json = await response.json();
+    if (json.status) {
+      alert('Serviço adicionado!')
+      getServices()
+    }
+  })
+
+  // 
+  async function removeService(id) {
+    const response = await fetch('/removeservice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: id.id })
+    })
+
+    const json = await response.json();
+    getServices();
+  }
+
+  async function changeDisponibility(data) {
+    let expectedTime = '0';
+    if (data.checked === false) {
+      expectedTime = prompt('Qual é o tempo estimado (em horas) para que o serviço volte a funcionar?');
+      if (isNaN(expectedTime) || expectedTime === null || expectedTime == '') {
+        expectedTime = '0'
+      }
+    }
+
+    const response = await fetch('/changedisponibility', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: data.id, disponible: data.checked, expectedTime })
+    })
+
+    const json = await response.json();
+    getServices()
+  }
+</script>
+
+</html>

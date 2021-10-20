@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo-min.svg" type="image/x-icon">
+  <title>System Status - Recuperar</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    body,
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .form-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #form-recovery {
+      display: flex;
+      width: 340px;
+      flex-direction: column;
+    }
+
+    #form-recovery {
+      background-color: #fff;
+      display: flex;
+      width: 340px;
+      height: 500px;
+      border: 1px solid #f9f9f9;
+      border-radius: 5px;
+      padding: 10px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    input,
+    button,
+    select {
+      padding: 10px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="form-container">
+      <form id="form-recovery">
+        <div id="logo">
+          <h1 id="logo-text">
+            <a href="/">Stystem Status</a>
+          </h1>
+        </div>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="new-pass" placeholder="Nova senha">
+        <input type="password" id="c-new-pass" placeholder="Confirmar nova senha">
+        <button>Recuperar</button>
+        <div class="form-links">
+          <a href="/login">Efectuar o login!</a>
+          <a href="/register">Cadastrar-se!</a>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</body>
+
+<script>
+  document.getElementById('form-recovery').addEventListener('submit', async e => {
+    e.preventDefault()
+    const email = document.getElementById('email').value
+    const pass = document.getElementById('pass').value
+    const cPass = document.getElementById('c-pass').value
+
+    const data = { email, pass, cPass }
+
+    console.log(data);
+
+  })
+</script>
+
+</html>

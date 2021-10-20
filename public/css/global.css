@@ -1,0 +1,68 @@
+@font-face {
+  font-family: rbt;
+  src: url(../fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: ms;
+  src: url(../fonts/Montserrat-Medium.ttf);
+}
+
+* {
+  font-family: ms;
+  font-size: 14px;
+}
+
+body {
+  background-color: #fcfcfc;
+}
+
+a {
+  text-decoration: none;
+  color: indigo;
+}
+
+button {
+  cursor: pointer;
+}
+
+input, select {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  outline: none;
+}
+
+button {
+  border: 1px solid indigo;
+  background-color: indigo;
+  color: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+input:focus {
+  border-color: indigo;
+}
+
+.form-links a {
+  display: block;
+  margin: 5px 0;
+}
+
+#logo {
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+#logo-text {
+  text-align: center;
+}
+
+#logo-text a {
+  font-size: 32px;
+  font-family: rbt;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo-min.svg" type="image/x-icon">
+  <title>System Status - Registar</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    body,
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .form-container {
+      height: 100vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .motivation {
+      width: 300px;
+      line-height: 25px;
+    }
+
+
+    #form-register {
+      background-color: #fff;
+      display: flex;
+      width: 340px;
+      height: 500px;
+      border: 1px solid #f9f9f9;
+      border-radius: 5px;
+      padding: 10px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 414px) {
+      .motivation {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="form-container">
+      <div class="motivation">
+        <p>Caminhar Kilómetros de distância até o banco... gastar dinehiro de bus...
+          e chegar ao banco descrobrir que o serviço que procura
+          não está disponível é coisa do passado!
+        </p>
+      </div>
+      <form id="form-register">
+        <div id="logo">
+          <!-- <h1 id="logo-text">
+            <a href="/">Stystem Status</a>
+          </h1> -->
+          <a href="/"><img src="img/logo.svg" alt=""></a>
+        </div>
+        <select id="bank">
+          <option value="0">Millenium Bim</option>
+        </select>
+        <input type="text" id="balcon" placeholder="Nome do Balcão" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="pass" placeholder="Senha" required>
+        <input type="password" id="c-pass" placeholder="Confirmar senha" required>
+        <button>Registar balcão</button>
+        <div class="form-links">
+          <a href="/login">Já estou cadastrado!</a>
+          <a href="#">Esqueci a senha!</a>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+
+<script src="js/config.js"></script>
+<script>
+  document.getElementById('form-register').addEventListener('submit', async e => {
+    e.preventDefault()
+    const bank = document.getElementById('bank').value
+    const email = document.getElementById('email').value
+    const balcon = document.getElementById('balcon').value
+    const pass = document.getElementById('pass').value
+    const cPass = document.getElementById('c-pass').value
+
+    if (pass !== cPass) {
+      alert('As senhas não coincidem');
+      return;
+    }
+
+    const data = { bank, balcon, email, pass }
+
+    const response = await fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+    const json = await response.json()
+    if (json.status) {
+      alert(`Registou "${balcon}", faça login!`)
+      window.location.href = '/login'
+    }
+  })
+
+
+
+
+  let banks = ''
+  config.banks.forEach(bank => {
+    banks += `<option value='${bank.id}'>${bank.label}</option>`;
+  });
+
+  document.getElementById('bank').innerHTML = banks;
+</script>
+
+</html>

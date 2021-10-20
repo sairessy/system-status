@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo-min.svg" type="image/x-icon">
+  <title>System Status - Logar</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    body,
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .form-container {
+      height: 100vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .motivation {
+      width: 300px;
+      line-height: 25px;
+    }
+
+    #form-login {
+      background-color: #fff;
+      display: flex;
+      width: 340px;
+      height: 500px;
+      border: 1px solid #f9f9f9;
+      border-radius: 5px;
+      padding: 10px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    input,
+    button,
+    select {
+      padding: 10px;
+      margin: 5px 0;
+    }
+
+    @media screen and (max-width: 414px) {
+      .motivation {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="form-container">
+      <div class="motivation">
+        <p>Caminhar Kilómetros de distância até o banco... gastar dinehiro de bus...
+          e chegar ao banco descrobrir que o serviço que procura
+          não está disponível é coisa do passado!
+        </p>
+      </div>
+      <form id="form-login">
+        <div id="logo">
+          <!-- <h1 id="logo-text">
+            <a href="/">Stystem Status</a>
+          </h1> -->
+          <a href="/"><img src="img/logo.svg" alt=""></a>
+        </div>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="pass" placeholder="Senha">
+        <button>Entrar</button>
+        <div class="form-links">
+          <a href="/register">Efectuar o cadastro!</a>
+          <a href="#">Esqueci a senha!</a>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+
+<script>
+  document.getElementById('form-login').addEventListener('submit', async e => {
+    e.preventDefault()
+    const email = document.getElementById('email').value
+    const pass = document.getElementById('pass').value
+
+    const data = { email, pass }
+
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+    const json = await response.json()
+    if (json.status) {
+      window.location.href = '/profile'
+    } else {
+      alert('Usuário ou senha inválida!')
+    }
+
+  })
+</script>
+
+</html>
