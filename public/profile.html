@@ -206,7 +206,14 @@
     </aside>
     <section>
       <form id="form-add-service">
-        <input type="text" placeholder="Nome do serviço" id="inp-service-label" required>
+        <input type="text" placeholder="Nome do serviço" id="inp-service-label" required list="datalist-services">
+        <datalist id="datalist-services">
+          <option>Abertura de conta</option>
+          <option>Emissão de check</option>
+          <option>Actualização de dados</option>
+          <option>Estrato da conta</option>
+          <option>Levantamento de cartão</option>
+        </datalist>
         <button>Adicionar</button>
       </form>
       <div id="services">
@@ -306,7 +313,7 @@
   async function changeDisponibility(data) {
     let expectedTime = '0';
     if (data.checked === false) {
-      expectedTime = prompt('Qual é o tempo estimado (em horas) para que o serviço volte a funcionar?');
+      expectedTime = prompt('Qual é o tempo estimado (em horas) para que o serviço volte a funcionar?(Opcional)');
       if (isNaN(expectedTime) || expectedTime === null || expectedTime == '') {
         expectedTime = '0'
       }

@@ -50,6 +50,16 @@
       .motivation {
         display: none;
       }
+
+      .form-container {
+        background-color: #fff;
+        height: auto;
+      }
+
+      #form-login {
+        width: calc(100% - 20px);
+        border: none;
+      }
     }
   </style>
 </head>
@@ -59,15 +69,12 @@
     <div class="form-container">
       <div class="motivation">
         <p>Caminhar Kilómetros de distância até o banco... gastar dinehiro de bus...
-          e chegar ao banco descrobrir que o serviço que procura
+          e chegar ao banco descobrir que o serviço que procura
           não está disponível é coisa do passado!
         </p>
       </div>
       <form id="form-login">
         <div id="logo">
-          <!-- <h1 id="logo-text">
-            <a href="/">Stystem Status</a>
-          </h1> -->
           <a href="/"><img src="img/logo.svg" alt=""></a>
         </div>
         <input type="email" id="email" placeholder="Email">
@@ -75,7 +82,7 @@
         <button>Entrar</button>
         <div class="form-links">
           <a href="/register">Efectuar o cadastro!</a>
-          <a href="#">Esqueci a senha!</a>
+          <a href="/recovery">Esqueci a senha!</a>
         </div>
       </form>
     </div>

@@ -7,19 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="img/logo-min.svg" type="image/x-icon">
   <!-- <link rel="stylesheet" href="libraries/all.min.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.0.0-beta2/css/fontawesome.min.css"
-    integrity="sha512-Rcr1oG0XvqZI1yv1HIg9LgZVDEhf2AHjv+9AuD1JXWGLzlkoKDVvE925qySLcEywpMAYA/rkg296MkvqBF07Yw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-  <!-- <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
-    integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/fontawesome.css"
-      integrity="sha512-NQCKOSsUyZsvf5ItxWh1bR2vlY0cgw1Rx9tJRLJr31GT9oxCno9uwtiVmVFgN2BlHo1jmwjtH8ivIaob4YF+jw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,12 +14,12 @@
   <style>
     ::-webkit-scrollbar {
       background: #eee;
-      width: 10px;
+      width: 8px;
     }
 
     ::-webkit-scrollbar-thumb {
       border-radius: 25px;
-      background: #ccc;
+      background: #2bccb1;
     }
 
     @font-face {
@@ -50,12 +37,11 @@
       padding: 0;
       margin: 0;
       font-family: ms;
-      font-family: rbt;
       font-size: 14px;
     }
 
     body {
-      background-color: #fcfcfc;
+      background-color: #f9f9f9;
     }
 
     a {
@@ -81,6 +67,7 @@
 
     .header-bank-name {
       font-size: 22px;
+      font-family: rbt;
       color: #999;
     }
 
@@ -99,21 +86,20 @@
     }
 
     #btn-bars-container {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      display: none;
     }
 
     #btn-bars-container:active {
-      background-color: #ddd;
+      background-color: #eee;
     }
 
     section {
-      width: 70%;
+      width: 80%;
       margin: auto;
       height: calc(100vh - 102px);
       overflow-y: scroll;
@@ -156,8 +142,8 @@
     }
 
     .logo-min {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       display: none;
     }
 
@@ -181,11 +167,11 @@
 
     footer {
       height: 40px;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #ddd;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: #f9f9f9;
+      background-color: #eee;
     }
 
     footer .contact {
@@ -270,6 +256,9 @@
 <body>
   <header>
     <div class="header-aside">
+      <div id="btn-bars-container">
+        <img src="img/bars-solid.svg" alt="bars" id="btn-bars" width="25" height="25">
+      </div>
       <div id="logo">
         <a href="/"><img src="img/logo.svg" alt=""></a>
       </div>
@@ -289,9 +278,6 @@
         <i class="fa fa-user-circle"></i>
         <p id="link-login-label">Iniciar sessão</p>
       </a>
-      <div id="btn-bars-container">
-        <img src="img/bars-solid.svg" alt="bars" id="btn-bars" width="30" height="30">
-      </div>
     </div>
   </header>
 
@@ -310,7 +296,7 @@
     <div class="contact">
       <p>
         <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=sairessy@gmail.com&su=&body=">
-          <i class="fa fa-envelope"></i>email
+          <i class="fa fa-envelope"></i>Email
         </a>
       </p>
       <p><a href="https://wa.me/+258847460853"><i class="fa fa-whatsapp"></i>WhatsApp</a></p>
@@ -337,30 +323,31 @@
     for (let i = 0; i < json.length; i++) {
       const { balcon, bank, services } = json[i];
       let ss = '';
+      let hours = '';
+      let mins = '';
+      let secs = '';
       services.forEach(s => {
         let remainingTime = '';
         if (s.time !== '0' && s.expectedTime !== undefined) {
-          remainingTime = `
-            ${new Date(Date.now() - s.time).getUTCHours()} :
-              ${new Date(Date.now() - s.time).getMinutes()} : 
-              ${new Date(Date.now() - s.time).getSeconds()
-            }`
+          hours = new Date(Date.now() - s.time).getUTCHours()
+          hours = new Date(Date.now() - s.time).getMinutes()
+          hours = new Date(Date.now() - s.time).getSeconds()
+          remainingTime = `${hours} : ${mins} : ${secs}`;
 
           if (s.expectedTime <= new Date(Date.now() - s.time).getUTCHours()) {
             remainingTime = `${s.expectedTime} : 0 : 0`;
           }
         }
         ss += `
-        <div id='${s.time + '-' + s.expectedTime}' style='display: flex; align-items: center; margin-bottom: 10px;' class='service'>
-          <div style='width:10px; height:10px; border-radius: 100%;
-          background: ${s.disponible ? '#2bccb1' : '#ddd'};margin-right: 20px;'></div>
-          <p>${s.label}</p>
-          <p style='margin-left: 10px;color: #777;' id='${s.time + '-' + s.expectedTime + '-' + 'timer'}'>
-          ${remainingTime !== '' && s.expectedTime !== '0' ?
-            remainingTime + ' -- ' + s.expectedTime + ' h' : ''
-          }
-          </p>
-        </div>`;;
+        <div id='${s.time + '-' + s.expectedTime}' style='display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;' class='service'>
+          <div style='display: flex; align-items: center;'>
+            <div style='width:10px; height:10px; border-radius: 100%;
+              background: ${s.disponible ? '#2bccb1' : '#ddd'};margin-right: 20px;'>
+            </div>
+            <p>${s.label}</p>
+          </div>
+          <p style='margin-left: 10px;color: #777; width: 100px;font-family: rbt;' id='${s.time + '-' + s.expectedTime + '-' + 'timer'}'></p>
+        </div>`;
       })
       systems += `
         <li class="system" style='margin-bottom: 40px;'>
@@ -385,14 +372,13 @@
         const hours = new Date(Date.now() - time).getUTCHours();
         const mins = new Date(Date.now() - time).getMinutes();
         const secs = new Date(Date.now() - time).getSeconds();
-        const remainingTime = `${hours} : ${mins} : ${secs}`;
-        const remaining = remainingTime + ' -- ' + expectedTime + ' h';
+        const remainingTime = `${expectedTime - hours - 1}h ${60 - mins}m ${60 - secs}s`;
 
         if (hours >= expectedTime) {
           return;
         }
 
-        document.getElementById(`${s.id}-timer`).innerText = remaining;
+        document.getElementById(`${s.id}-timer`).innerText = remainingTime;
       }
     });
   }, 1000);
@@ -425,29 +411,16 @@
         const { balcon, bank, services } = json[i];
         let ss = '';
         services.forEach(s => {
-          let remainingTime = '';
-          if (s.time !== '0' && s.expectedTime !== undefined) {
-            remainingTime = `
-            ${new Date(Date.now() - s.time).getUTCHours()} :
-              ${new Date(Date.now() - s.time).getMinutes()} : 
-              ${new Date(Date.now() - s.time).getSeconds()
-              }`
-
-            if (s.expectedTime <= new Date(Date.now() - s.time).getUTCHours()) {
-              remainingTime = `${s.expectedTime} : 0 : 0`;
-            }
-          }
           ss += `
-        <div id='${s.time + '-' + s.expectedTime}' style='display: flex; align-items: center; margin-bottom: 10px;' class='service'>
-          <div style='width:10px; height:10px; border-radius: 100%;
-          background: ${s.disponible ? '#2bccb1' : '#ddd'};margin-right: 20px;'></div>
-          <p>${s.label}</p>
-          <p style='margin-left: 10px;color: #777;' id='${s.time + '-' + s.expectedTime + '-' + 'timer'}'>
-          ${remainingTime !== '' && s.expectedTime !== '0' ?
-              remainingTime + ' -- ' + s.expectedTime + ' h' : ''
-            }
-          </p>
-        </div>`;;
+        <div id='${s.time + '-' + s.expectedTime}' style='display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;' class='service'>
+          <div style='display: flex; align-items: center;'>
+            <div style='width:10px; height:10px; border-radius: 100%;
+              background: ${s.disponible ? '#2bccb1' : '#ddd'};margin-right: 20px;'>
+            </div>
+            <p>${s.label}</p>
+          </div>
+          <p style='margin-left: 10px;color: #777; width: 100px; font-family: rbt;' id='${s.time + '-' + s.expectedTime + '-' + 'timer'}'></p>
+        </div>`;
         })
         systems += `
         <li class="system" style='margin-bottom: 40px;'>
