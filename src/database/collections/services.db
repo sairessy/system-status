@@ -13,5 +13,4 @@
 {"label":"Estrato bancário","user":"4amE7mPEriuX6ZhP","disponible":false,"_id":"uqpVyW5jdWlHhkYM","expectedTime":"3","time":"1634866483779"}
 {"label":"Actualização de dados","user":"vkQmqZbxjLudMvV9","disponible":false,"_id":"vnDcvJhlmSpder4P","expectedTime":"5","time":"1634758771377"}
 {"label":"Compra de check","user":"vkQmqZbxjLudMvV9","disponible":false,"_id":"ycSms09LI8rfgn8T","expectedTime":"0","time":"1634758777550"}
-{"label":"Actualização de dados","user":"4amE7mPEriuX6ZhP","disponible":true,"_id":"z24C7K8nf9xic3Pw","expectedTime":"0","time":"0"}
-{"label":"Actualização de dados","user":"4amE7mPEriuX6ZhP","disponible":false,"_id":"z24C7K8nf9xic3Pw","expectedTime":"2","time":"1634870224488"}
+{"label":"Actualização de dados","user":"4amE7mPEriuX6ZhP","disponible":false,"_id":"z24C7K8nf9xic3Pw","expectedTime":"14","time":"1634931348611"}
